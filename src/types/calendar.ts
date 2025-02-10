@@ -76,6 +76,7 @@ export interface EventarProps {
   theme?: "dark" | "light";
   customEventViewer?: (event: CalendarEvent) => JSX.Element;
   defaultModalConfig?: DefaultModalConfig;
+  showAgenda?: boolean;
 }
 
 export interface RenderViewProps {
@@ -91,6 +92,7 @@ export interface RenderViewProps {
   setIsDayModalOpen: (isOpen: boolean) => void;
   setSelectedEvent: (event: CalendarEvent | null) => void;
   setIsEventModalOpen: (isOpen: boolean) => void;
+  agendaView: boolean;
 }
 
 export interface CalendarHeaderProps {
@@ -105,6 +107,9 @@ export interface CalendarHeaderProps {
   yearRange: string[];
   showPastDates: boolean;
   availableColors: FilterColors[];
+  showAgenda: boolean;
+  agendaView: boolean;
+  handleAgendaView?: (agendaView: boolean) => void;
 }
 
 export interface ViewOptionsProps {

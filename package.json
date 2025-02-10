@@ -28,6 +28,7 @@
     "LICENSE"
   ],
   "scripts": {
+    "dev": "vite",
     "build": "npm run build:ts && npm run build:css",
     "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
     "build:ts": "tsup src/index.ts --tsconfig tsconfig.build.json",
@@ -38,6 +39,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
+  "license": "MIT",
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.2",
     "@radix-ui/react-checkbox": "^1.1.3",

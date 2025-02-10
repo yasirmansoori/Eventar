@@ -1,3 +1,8 @@
 dist
 node_modules
 package-lock.json
+
+# files to ignore
+src/index.ts
+src/styles.css
+src/styles/index.css

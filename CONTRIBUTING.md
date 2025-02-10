@@ -42,8 +42,13 @@ npm install
 ## Developing
 
 ```sh
+# Create App.tsx file in the src folder and start coding
+touch src/App.tsx
+```
+
+```sh
 # launch the playground
-npm start
+npm run dev
 
 # Check Pretty format
 npm format:check

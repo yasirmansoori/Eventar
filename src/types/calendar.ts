@@ -105,7 +105,6 @@ export interface CalendarHeaderProps {
   navigation?: boolean;
   showViewOptions: CalendarView[];
   yearRange: string[];
-  showPastDates: boolean;
   availableColors: FilterColors[];
   showAgenda: boolean;
   agendaView: boolean;
@@ -123,5 +122,4 @@ export interface NavigationProps {
   setCurrentDate: (date: Date) => void;
   view: string;
   availableYears: number[];
-  showPastDates: boolean;
 }

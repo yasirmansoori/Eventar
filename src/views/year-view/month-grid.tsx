@@ -4,6 +4,11 @@ import { MonthGridProps } from "@/types/month";
 import { WEEKDAYS } from "@/constants/calendar";
 import { DayCell } from "./day-cell";
 
+const getAlignedWeekdays = (year: number, monthIndex: number) => {
+  const firstDay = new Date(year, monthIndex, 1).getDay();
+  return [...WEEKDAYS.slice(firstDay), ...WEEKDAYS.slice(0, firstDay)];
+};
+
 export const MonthGrid = memo(function MonthGrid({
   month,
   monthIndex,
@@ -13,10 +18,11 @@ export const MonthGrid = memo(function MonthGrid({
   handleEventClick,
 }: MonthGridProps) {
   const days = getMonthDays(year, monthIndex);
+  const alignedWeekdays = getAlignedWeekdays(year, monthIndex);
 
   return (
     <div className="grid grid-cols-7 gap-1 text-sm">
-      {WEEKDAYS.map((day) => (
+      {alignedWeekdays.map((day) => (
         <div
           key={day}
           className="text-center text-zinc-500 dark:text-zinc-400"

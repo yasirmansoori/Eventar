@@ -68,6 +68,7 @@ export const renderView = ({
         />
       ) : (
         <MonthView
+          date={currentDate}
           year={currentDate.getFullYear()}
           month={currentDate.getMonth()}
           events={filteredEvents}

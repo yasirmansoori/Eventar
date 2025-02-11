@@ -1,6 +1,7 @@
 import { CalendarEvent } from "./calendar";
 
 export interface MonthViewProps {
+  date: Date;
   year: number;
   month: number;
   events: CalendarEvent[];

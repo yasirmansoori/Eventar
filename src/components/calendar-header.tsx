@@ -16,7 +16,6 @@ export function CalendarHeader({
   navigation,
   showViewOptions,
   yearRange,
-  showPastDates,
   availableColors,
   showAgenda,
   agendaView,
@@ -49,7 +48,6 @@ export function CalendarHeader({
               setCurrentDate={setCurrentDate}
               view={view}
               availableYears={availableYears}
-              showPastDates={showPastDates}
             />
           )}
 

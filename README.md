@@ -38,7 +38,7 @@ pnpm add eventar
 
 ```jsx
 import { Eventar } from "eventar";
-import "eventar/dist/style.css"; // Import the default styles
+import "eventar/dist/eventar.css"; // Import the default styles
 
 function App() {
   const events = [

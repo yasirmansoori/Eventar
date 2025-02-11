@@ -20,7 +20,7 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./styles.css": "./dist/styles.css"
+    "./dist/eventar.css": "./dist/eventar.css"
   },
   "files": [
     "dist",
@@ -30,7 +30,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run build:ts && npm run build:css",
-    "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./dist/eventar.css --minify",
     "build:ts": "tsup src/index.ts --tsconfig tsconfig.build.json",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css,json}\""

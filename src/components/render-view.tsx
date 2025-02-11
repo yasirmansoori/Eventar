@@ -1,4 +1,5 @@
 import type { CalendarEvent, RenderViewProps } from "@/types/calendar";
+import { AgendaView } from "../views/agenda-view/agenda-view";
 import { DayView } from "../views/day-view/day-view";
 import { MonthView } from "../views/month-view/month-view";
 import { WeekView } from "../views/week-view/week-view";
@@ -18,6 +19,7 @@ export const renderView = ({
   setIsDayModalOpen,
   setSelectedEvent,
   setIsEventModalOpen,
+  agendaView,
 }: RenderViewProps) => {
   if (error) {
     return (
@@ -45,7 +47,12 @@ export const renderView = ({
 
   switch (view) {
     case "year":
-      return (
+      return agendaView ? (
+        <AgendaView
+          events={filteredEvents}
+          handleEventClick={handleEventClick}
+        />
+      ) : (
         <YearView
           year={currentDate.getFullYear()}
           events={filteredEvents}
@@ -54,8 +61,14 @@ export const renderView = ({
         />
       );
     case "month":
-      return (
+      return agendaView ? (
+        <AgendaView
+          events={filteredEvents}
+          handleEventClick={handleEventClick}
+        />
+      ) : (
         <MonthView
+          date={currentDate}
           year={currentDate.getFullYear()}
           month={currentDate.getMonth()}
           events={filteredEvents}
@@ -66,7 +79,12 @@ export const renderView = ({
         />
       );
     case "week":
-      return (
+      return agendaView ? (
+        <AgendaView
+          events={filteredEvents}
+          handleEventClick={handleEventClick}
+        />
+      ) : (
         <WeekView
           date={currentDate}
           events={filteredEvents}
@@ -76,7 +94,12 @@ export const renderView = ({
         />
       );
     case "day":
-      return (
+      return agendaView ? (
+        <AgendaView
+          events={filteredEvents}
+          handleEventClick={handleEventClick}
+        />
+      ) : (
         <DayView
           date={currentDate}
           events={filteredEvents}

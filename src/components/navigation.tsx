@@ -1,12 +1,6 @@
 import { format } from "date-fns";
 import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -21,7 +15,6 @@ export function Navigation({
   setCurrentDate,
   view,
   availableYears,
-  showPastDates,
 }: NavigationProps) {
   const navigateDate = (direction: "prev" | "next") => {
     const newDate = new Date(currentDate);
@@ -86,13 +79,6 @@ export function Navigation({
     }
   };
 
-  const isDateDisabled = (date: Date) => {
-    if (showPastDates) return false;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return date < today;
-  };
-
   return (
     <div className="flex items-center gap-2" id="navigation">
       <Button
@@ -105,34 +91,10 @@ export function Navigation({
       </Button>
 
       <div className="flex gap-2">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant="outline" className="min-w-[120px]">
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              {format(currentDate, "MMMM")}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0">
-            <Calendar
-              mode="single"
-              selected={currentDate}
-              onSelect={(date) =>
-                date && !isDateDisabled(date) && setCurrentDate(date)
-              }
-              defaultMonth={currentDate}
-              month={currentDate}
-              initialFocus
-              disabled={isDateDisabled}
-              modifiers={{
-                past: (date) => !showPastDates && isDateDisabled(date),
-              }}
-              modifiersStyles={{
-                past: { color: "var(--gray-400)", pointerEvents: "none" },
-              }}
-            />
-          </PopoverContent>
-        </Popover>
-
+        <Button variant="outline" className="min-w-[120px] cursor-auto">
+          <CalendarIcon className="mr-2 h-4 w-4" />
+          {format(currentDate, "MMMM")}
+        </Button>
         <Select
           value={currentDate.getFullYear().toString()}
           onValueChange={(year) => {

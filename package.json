@@ -33,7 +33,8 @@
     "build:css": "tailwindcss -i ./src/styles.css -o ./dist/eventar.css --minify",
     "build:ts": "tsup src/index.ts --tsconfig tsconfig.build.json",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,json}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,css,json}\""
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css,json}\"",
+    "link:prepare": "npm run build && npm link"
   },
   "peerDependencies": {
     "react": "^18.0.0",

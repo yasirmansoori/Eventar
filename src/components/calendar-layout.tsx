@@ -29,6 +29,7 @@ export function Eventar({
   theme = "light",
   customEventViewer,
   defaultModalConfig,
+  showAgenda = false,
 }: EventarProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(
@@ -50,6 +51,7 @@ export function Eventar({
 
   const [view, setView] = useState<CalendarView>(defaultView);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [agendaView, setAgendaView] = useState(false);
 
   const availableColors: FilterColors[] = useMemo(() => {
     const validColors = events
@@ -82,7 +84,7 @@ export function Eventar({
 
   return (
     <Fragment>
-      <div className={`min-h-screen ${theme === "dark" ? "dark" : ""}`}>
+      <div className={`${theme === "dark" ? "dark" : ""}`} id="eventar-wrapper">
         <div
           className="flex flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50"
           id="calendar-layout"
@@ -97,8 +99,10 @@ export function Eventar({
             navigation={navigation}
             showViewOptions={views}
             yearRange={validYearRange}
-            showPastDates={showPastDates}
             availableColors={availableColors}
+            showAgenda={showAgenda}
+            agendaView={agendaView}
+            handleAgendaView={() => setAgendaView(!agendaView)}
           />
           <motion.main
             id="calendar-view"
@@ -122,6 +126,7 @@ export function Eventar({
                 setIsDayModalOpen,
                 setSelectedEvent,
                 setIsEventModalOpen,
+                agendaView,
               })}
             </ErrorBoundary>
           </motion.main>

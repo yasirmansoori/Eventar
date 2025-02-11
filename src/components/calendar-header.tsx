@@ -16,8 +16,10 @@ export function CalendarHeader({
   navigation,
   showViewOptions,
   yearRange,
-  showPastDates,
   availableColors,
+  showAgenda,
+  agendaView,
+  handleAgendaView,
 }: CalendarHeaderProps) {
   if (!showViewOptions || showViewOptions.length === 0) {
     throw new Error("At least one view option must be provided");
@@ -46,7 +48,6 @@ export function CalendarHeader({
               setCurrentDate={setCurrentDate}
               view={view}
               availableYears={availableYears}
-              showPastDates={showPastDates}
             />
           )}
 
@@ -69,6 +70,16 @@ export function CalendarHeader({
             >
               Today
             </Button>
+
+            {showAgenda && (
+              <Button
+                size="md"
+                onClick={() => handleAgendaView?.(!showAgenda)}
+                variant={agendaView ? "default" : "outline"}
+              >
+                Agenda
+              </Button>
+            )}
 
             <ViewOptions
               view={view}

@@ -6,6 +6,7 @@ import { getMonthDays } from "@/utils/date-utils";
 import { MonthViewProps } from "@/types/month";
 
 export function MonthView({
+  date,
   year,
   month,
   events,
@@ -19,7 +20,7 @@ export function MonthView({
     <ErrorBoundary>
       <div className="flex flex-col" id="month-view">
         <div className="grid grid-cols-7 border border-zinc-200 rounded-lg bg-white dark:border-zinc-800 dark:bg-zinc-950">
-          <WeekDaysHeader />
+          <WeekDaysHeader date={date} />
           {days.map((date, index) => (
             <DayCell
               key={date.toString()}

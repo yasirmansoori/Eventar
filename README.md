@@ -92,12 +92,37 @@ You can switch between **light** and **dark** themes by passing the `theme` prop
 | `spinnerComponent`   | ❌        | `SpinnerVariant`                | `SpinnerVariant.SQUARE` | Custom spinner component to display while loading                           |
 | `customViewerModal`  | ❌        | `(event: Event) => JSX.Element` | `null`                  | Custom modal component to display event details                             |
 | `defaultModalConfig` | ❌        | `DefaultModalConfig`            | `{}`                    | Default configuration for event modal, if customViewerModal is not provided |
+| `showAgenda`         | ❌        | `boolean`                       | `true`                  | Show/hide agenda view in the calendar                                       |
 ---
 
 ## 🎨 **Customization**
 ### **`<CustomViewerModal>` Component**
 
+- By default Eventar has 3 built-in custom modal components: `SimpleEventModal`, `CompactEventModal`, and `CardEventModal`. Import them from the `Modals` object so that you can use these components by passing in the `CustomViewerModal` prop, or create your own custom modal component.
+
 ```jsx
+<Eventar
+  events={events}
+  customEventViewer={(event) => <Modals.Simple event={event} />}
+/>
+
+// or
+
+<Eventar
+  events={events}
+  customEventViewer={(event) => <Modals.Compact event={event} />}
+/>
+
+// or
+
+<Eventar
+  events={events}
+  customEventViewer={(event) => <Modals.Card event={event} />}
+/>
+
+// or
+
+// Create your own custom modal component
 <Eventar
   events={events}
   customEventViewer={(event) => (
@@ -106,7 +131,6 @@ You can switch between **light** and **dark** themes by passing the `theme` prop
       <p>{event.description}</p>
     </div>
   )}
-/>
 ```
 
 ## 📈 **Data Fetching**  

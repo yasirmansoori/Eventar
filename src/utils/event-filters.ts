@@ -20,7 +20,6 @@ interface FilterOptions {
 
 export function filterEvents(events: CalendarEvent[], options: FilterOptions) {
   const { view, currentDate, selectedColors, selectedResource } = options;
-  console.log(view, currentDate, selectedColors, selectedResource);
 
   return events.filter((event) => {
     // Color and resource filtering

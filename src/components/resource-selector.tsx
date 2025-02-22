@@ -66,7 +66,9 @@ export function ResourceSelector({
                         //   backgroundColor: resource.color || "currentColor",
                         // }}
                       />
-                      {resource.name}
+                      {resource.name.length > 20
+                        ? `${resource.name.slice(0, 20)}...`
+                        : resource.name}
                     </div>
                   </SelectItem>
                 ))}

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Fragment, useMemo, useState } from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { getEventsForDate } from "@/utils/calendar-utils";
 import { filterEvents } from "@/utils/event-filters";
 import type {
@@ -39,8 +40,14 @@ export function Eventar({
   );
   const [isDayModalOpen, setIsDayModalOpen] = useState(false);
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  const [selectedResource, setSelectedResource] = useState<string>("all");
+  const [selectedColors, setSelectedColors] = useLocalStorage<string[]>(
+    "eventar-selected-colors",
+    []
+  );
+  const [selectedResource, setSelectedResource] = useLocalStorage<string>(
+    "eventar-selected-resource",
+    "all"
+  );
 
   const currentYear = new Date().getFullYear().toString();
 
@@ -52,9 +59,15 @@ export function Eventar({
     ? [...yearRange].sort((a, b) => Number(a) - Number(b))
     : [currentYear];
 
-  const [view, setView] = useState<CalendarView>(defaultView);
+  const [view, setView] = useLocalStorage<CalendarView>(
+    "eventar-current-view",
+    defaultView
+  );
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [agendaView, setAgendaView] = useState(false);
+  const [agendaView, setAgendaView] = useLocalStorage<boolean>(
+    "eventar-agenda-view",
+    false
+  );
 
   const availableColors: FilterColors[] = useMemo(() => {
     const resourceEvents =

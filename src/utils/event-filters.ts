@@ -15,19 +15,20 @@ interface FilterOptions {
   view: CalendarView;
   currentDate: Date;
   selectedColors: string[];
-  // selectedResource: string | null;
+  selectedResource: string;
 }
 
 export function filterEvents(events: CalendarEvent[], options: FilterOptions) {
-  const { view, currentDate, selectedColors } = options;
+  const { view, currentDate, selectedColors, selectedResource } = options;
+  console.log(view, currentDate, selectedColors, selectedResource);
 
   return events.filter((event) => {
     // Color and resource filtering
     const matchesColor =
       selectedColors.length === 0 ||
       (event.color && selectedColors.includes(event.color));
-    // const matchesResource =
-    //   !selectedResource || event.resourceId === selectedResource;
+    const matchesResource =
+      selectedResource === "all" || event.resourceId === selectedResource;
 
     // Date range filtering
     let start, end;
@@ -60,7 +61,6 @@ export function filterEvents(events: CalendarEvent[], options: FilterOptions) {
       isWithinInterval(eventEnd, { start, end }) ||
       (eventStart <= start && eventEnd >= end);
 
-    // return matchesColor && matchesResource && isInRange;
-    return matchesColor && isInRange;
+    return matchesColor && matchesResource && isInRange;
   });
 }

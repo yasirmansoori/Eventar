@@ -31,6 +31,7 @@ export function Eventar({
   defaultModalConfig,
   showAgenda = false,
   showClock = false,
+  resources = [],
 }: EventarProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(
@@ -39,6 +40,7 @@ export function Eventar({
   const [isDayModalOpen, setIsDayModalOpen] = useState(false);
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [selectedResource, setSelectedResource] = useState<string>("all");
 
   const currentYear = new Date().getFullYear().toString();
 
@@ -55,7 +57,12 @@ export function Eventar({
   const [agendaView, setAgendaView] = useState(false);
 
   const availableColors: FilterColors[] = useMemo(() => {
-    const validColors = events
+    const resourceEvents =
+      selectedResource === "all"
+        ? events
+        : events.filter((event) => event.resourceId === selectedResource);
+
+    const validColors = resourceEvents
       .map((event) => event.color)
       .filter(
         (color) =>
@@ -69,12 +76,13 @@ export function Eventar({
       );
 
     return Array.from(new Set(validColors));
-  }, [events]);
+  }, [events, selectedResource]);
 
   const filteredEvents = filterEvents(events, {
     view,
     currentDate,
     selectedColors,
+    selectedResource,
   });
 
   const handleColorToggle = (color: string) => {
@@ -105,6 +113,9 @@ export function Eventar({
             agendaView={agendaView}
             handleAgendaView={() => setAgendaView(!agendaView)}
             showClock={showClock}
+            resources={resources}
+            selectedResource={selectedResource}
+            onResourceChange={setSelectedResource}
           />
           <motion.main
             id="calendar-view"

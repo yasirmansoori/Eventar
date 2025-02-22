@@ -12,8 +12,8 @@ import type { Resource } from "@/types/calendar";
 
 interface ResourceSelectorProps {
   resources: Resource[];
-  selectedResource: string | null;
-  onResourceChange: (resourceId: string | null) => void;
+  selectedResource: string;
+  onResourceChange: (resourceId: string) => void;
 }
 
 export function ResourceSelector({
@@ -37,8 +37,8 @@ export function ResourceSelector({
 
   return (
     <Select
-      value={selectedResource || ""}
-      onValueChange={(value) => onResourceChange(value || null)}
+      value={selectedResource}
+      onValueChange={(value) => onResourceChange(value)}
     >
       <SelectTrigger className="w-[200px] h-10">
         <div className="flex items-center gap-2">
@@ -47,27 +47,33 @@ export function ResourceSelector({
         </div>
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="all">All Resources</SelectItem>{" "}
-        {/* Changed value from "" to "all" */}
-        {groupedResources &&
-          Object.entries(groupedResources).map(([type, resources]) => (
-            <SelectGroup key={type}>
-              <SelectLabel className="capitalize">{type}s</SelectLabel>
-              {resources.map((resource) => (
-                <SelectItem key={resource.id} value={resource.id}>
-                  <div className="flex items-center gap-2">
-                    <div
-                      className="h-2 w-2 rounded-full"
-                      style={{
-                        backgroundColor: resource.color || "currentColor",
-                      }}
-                    />
-                    {resource.name}
-                  </div>
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          ))}
+        {!resources || resources.length === 0 ? (
+          <SelectItem value="all" disabled>
+            No resources
+          </SelectItem>
+        ) : (
+          <>
+            <SelectItem value="all">All Resources</SelectItem>
+            {Object.entries(groupedResources).map(([type, resources]) => (
+              <SelectGroup key={type}>
+                <SelectLabel className="capitalize">{type}s</SelectLabel>
+                {resources.map((resource) => (
+                  <SelectItem key={resource.id} value={resource.id}>
+                    <div className="flex items-center gap-2">
+                      <div
+                        className="h-2 w-2 rounded-full bg-black dark:bg-white"
+                        // style={{
+                        //   backgroundColor: resource.color || "currentColor",
+                        // }}
+                      />
+                      {resource.name}
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            ))}
+          </>
+        )}
       </SelectContent>
     </Select>
   );

@@ -4,6 +4,7 @@ import { FilterPopover } from "@/components/filter-popover";
 import { Navigation } from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import { CalendarHeaderProps } from "@/types/calendar";
+import { ResourceSelector } from "./resource-selector";
 import { ViewOptions } from "./view-options";
 
 export function CalendarHeader({
@@ -21,6 +22,9 @@ export function CalendarHeader({
   agendaView,
   handleAgendaView,
   showClock,
+  resources,
+  selectedResource,
+  onResourceChange,
 }: CalendarHeaderProps) {
   if (!showViewOptions || showViewOptions.length === 0) {
     throw new Error("At least one view option must be provided");
@@ -84,6 +88,12 @@ export function CalendarHeader({
 
           {/* View Options */}
           <div className="flex items-center gap-2 ml-auto">
+            <ResourceSelector
+              resources={resources}
+              selectedResource={selectedResource}
+              onResourceChange={onResourceChange}
+            />
+
             <FilterPopover
               selectedColors={selectedColors}
               onColorToggle={onColorToggle}

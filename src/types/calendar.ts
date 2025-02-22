@@ -77,6 +77,7 @@ export interface EventarProps {
   customEventViewer?: (event: CalendarEvent) => JSX.Element;
   defaultModalConfig?: DefaultModalConfig;
   showAgenda?: boolean;
+  showClock?: boolean;
 }
 
 export interface RenderViewProps {
@@ -109,6 +110,7 @@ export interface CalendarHeaderProps {
   showAgenda: boolean;
   agendaView: boolean;
   handleAgendaView?: (agendaView: boolean) => void;
+  showClock: boolean;
 }
 
 export interface ViewOptionsProps {

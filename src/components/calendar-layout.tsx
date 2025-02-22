@@ -30,6 +30,7 @@ export function Eventar({
   customEventViewer,
   defaultModalConfig,
   showAgenda = false,
+  showClock = false,
 }: EventarProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(
@@ -103,6 +104,7 @@ export function Eventar({
             showAgenda={showAgenda}
             agendaView={agendaView}
             handleAgendaView={() => setAgendaView(!agendaView)}
+            showClock={showClock}
           />
           <motion.main
             id="calendar-view"

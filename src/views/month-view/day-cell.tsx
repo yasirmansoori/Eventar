@@ -19,10 +19,7 @@ export function DayCell({
 
   return (
     <motion.div
-      className={
-        "min-h-[180px] p-2 border border-zinc-200 relative group dark:border-zinc-800" +
-        getDateClassName(date, showPastDates, "month")
-      }
+      className={`min-h-[180px] p-2 m-1 border border-zinc-200 rounded relative group dark:border-zinc-800 ${getDateClassName(date, showPastDates, "month")} hover:bg-zinc-50 dark:hover:bg-zinc-900/20 transition-colors`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: index * 0.02 }}

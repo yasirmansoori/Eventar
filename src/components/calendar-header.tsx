@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { FilterPopover } from "@/components/filter-popover";
 import { Navigation } from "@/components/navigation";
@@ -20,6 +20,7 @@ export function CalendarHeader({
   showAgenda,
   agendaView,
   handleAgendaView,
+  showClock,
 }: CalendarHeaderProps) {
   if (!showViewOptions || showViewOptions.length === 0) {
     throw new Error("At least one view option must be provided");
@@ -37,10 +38,40 @@ export function CalendarHeader({
     setCurrentDate(new Date());
   };
 
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const getTimeEmoji = (hours: number) => {
+    if (hours >= 5 && hours < 12) return "🌅";
+    if (hours >= 12 && hours < 17) return "☀️";
+    if (hours >= 17 && hours < 20) return "🌇";
+    return "🌙";
+  };
+
   return (
     <ErrorBoundary>
       <header className="flex flex-col gap-4 p-4 border-b" id="calendar-header">
         <div className="flex flex-wrap items-center gap-2">
+          {showClock && (
+            <div className="flex items-center gap-2 text-lg font-semibold border border-zinc-200 rounded-md p-1 px-2">
+              <span>{getTimeEmoji(time.getHours())}</span>
+              <span>
+                {time.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                })}
+              </span>
+            </div>
+          )}
+
           {/* Navigation */}
           {navigation && (
             <Navigation

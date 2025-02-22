@@ -63,6 +63,17 @@ export function CalendarHeader({
     <ErrorBoundary>
       <header className="flex flex-col gap-4 p-4 border-b" id="calendar-header">
         <div className="flex flex-wrap items-center gap-2">
+          {/* Navigation */}
+          {navigation && (
+            <Navigation
+              currentDate={currentDate}
+              setCurrentDate={setCurrentDate}
+              view={view}
+              availableYears={availableYears}
+            />
+          )}
+
+          {/* Clock */}
           {showClock && (
             <div className="flex items-center gap-2 text-lg font-semibold border border-zinc-200 rounded-md p-1 px-2">
               <span>{getTimeEmoji(time.getHours())}</span>
@@ -74,16 +85,6 @@ export function CalendarHeader({
                 })}
               </span>
             </div>
-          )}
-
-          {/* Navigation */}
-          {navigation && (
-            <Navigation
-              currentDate={currentDate}
-              setCurrentDate={setCurrentDate}
-              view={view}
-              availableYears={availableYears}
-            />
           )}
 
           {/* View Options */}

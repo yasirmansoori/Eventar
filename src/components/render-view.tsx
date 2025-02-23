@@ -20,6 +20,7 @@ export const renderView = ({
   setSelectedEvent,
   setIsEventModalOpen,
   agendaView,
+  specialDays,
 }: RenderViewProps) => {
   if (error) {
     return (
@@ -58,6 +59,7 @@ export const renderView = ({
           events={filteredEvents}
           showPastDates={showPastDates}
           handleEventClick={handleEventClick}
+          specialDays={specialDays}
         />
       );
     case "month":

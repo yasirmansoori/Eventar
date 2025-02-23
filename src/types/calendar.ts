@@ -77,6 +77,7 @@ export interface EventarProps {
   showAgenda?: boolean;
   showClock?: boolean;
   resources?: Resource[];
+  specialDays?: SpecialDay[];
 }
 
 export interface RenderViewProps {
@@ -93,6 +94,7 @@ export interface RenderViewProps {
   setSelectedEvent: (event: CalendarEvent | null) => void;
   setIsEventModalOpen: (isOpen: boolean) => void;
   agendaView: boolean;
+  specialDays: SpecialDay[];
 }
 
 export interface CalendarHeaderProps {
@@ -126,4 +128,11 @@ export interface NavigationProps {
   setCurrentDate: (date: Date) => void;
   view: string;
   availableYears: number[];
+}
+
+export interface SpecialDay {
+  date: string;
+  title: string;
+  description: string;
+  type: string;
 }

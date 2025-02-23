@@ -1,4 +1,4 @@
-import { CalendarEvent } from "./calendar";
+import { CalendarEvent, SpecialDay } from "./calendar";
 
 export interface YearViewProps {
   year: number;
@@ -6,6 +6,7 @@ export interface YearViewProps {
   showPastDates?: boolean;
   handleEventClick?: (e: React.MouseEvent, event: CalendarEvent) => void;
   isLoading?: boolean;
+  specialDays?: SpecialDay[];
 }
 
 export interface YearViewDayCellProps {
@@ -13,4 +14,6 @@ export interface YearViewDayCellProps {
   events: CalendarEvent[];
   showPastDates: boolean;
   handleEventClick?: (e: React.MouseEvent, event: CalendarEvent) => void;
+  isSpecialDay: boolean;
+  specialDayContent?: SpecialDay;
 }

@@ -11,6 +11,7 @@ export const YearView = memo(function YearView({
   showPastDates = true,
   handleEventClick,
   isLoading,
+  specialDays,
 }: YearViewProps) {
   if (isLoading) {
     return <div className="animate-pulse">Loading calendar...</div>;
@@ -38,6 +39,7 @@ export const YearView = memo(function YearView({
                 events={events}
                 showPastDates={showPastDates}
                 handleEventClick={handleEventClick}
+                specialDays={specialDays}
               />
             </motion.div>
           </Suspense>

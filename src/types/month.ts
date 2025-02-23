@@ -1,4 +1,4 @@
-import { CalendarEvent } from "./calendar";
+import { CalendarEvent, SpecialDay } from "./calendar";
 
 export interface MonthViewProps {
   date: Date;
@@ -18,4 +18,5 @@ export interface MonthGridProps {
   events: CalendarEvent[];
   showPastDates: boolean;
   handleEventClick?: (e: React.MouseEvent, event: CalendarEvent) => void;
+  specialDays?: SpecialDay[];
 }

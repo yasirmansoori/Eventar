@@ -16,9 +16,12 @@ export const MonthGrid = memo(function MonthGrid({
   events,
   showPastDates,
   handleEventClick,
+  specialDays,
 }: MonthGridProps) {
   const days = getMonthDays(year, monthIndex);
   const alignedWeekdays = getAlignedWeekdays(year, monthIndex);
+  const isSpecialDay = (date: Date) =>
+    specialDays?.some((day) => day.date === date.toLocaleDateString()) ?? false;
 
   return (
     <div className="grid grid-cols-7 gap-1 text-sm">
@@ -38,6 +41,10 @@ export const MonthGrid = memo(function MonthGrid({
           events={events}
           showPastDates={showPastDates}
           handleEventClick={handleEventClick}
+          isSpecialDay={isSpecialDay(date)}
+          specialDayContent={specialDays?.find(
+            (day) => day.date === date.toLocaleDateString()
+          )}
         />
       ))}
     </div>

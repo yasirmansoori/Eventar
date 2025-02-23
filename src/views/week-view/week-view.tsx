@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { useWeekViewCalculations } from "@/hooks/use-week-view-calculations";
 import { getEventBackgroundColorClass } from "@/utils/color-utils";
+import { isSpecialDay } from "@/utils/date-utils";
 import { WeekViewProps } from "@/types/week";
 
 export function WeekView({
@@ -13,8 +14,8 @@ export function WeekView({
   events,
   showPastDates = true,
   handleEventClick,
-  handleDayClick,
   isLoading,
+  specialDays,
 }: WeekViewProps) {
   const { weekDays, hours, fullDayEvents, isPastDate } =
     useWeekViewCalculations(date, events, showPastDates);
@@ -37,7 +38,10 @@ export function WeekView({
             weekDays={weekDays}
             currentDate={date}
             isPastDate={isPastDate}
-            onDayClick={isPastDate(date) ? undefined : handleDayClick}
+            isSpecialDay={isSpecialDay(date, specialDays ?? [])}
+            specialDayContent={specialDays?.find((day) =>
+              isSpecialDay(date, [day])
+            )}
           />
 
           <div className="relative">
@@ -111,7 +115,13 @@ export function WeekView({
 
                             {/* Hover preview for stacked events */}
                             {eventIndex === 0 && eventArray.length > 1 && (
-                              <div className="absolute left-full top-0 ml-2 hidden group-hover/day:block z-50 w-48 bg-white dark:bg-zinc-900 rounded-lg shadow-xl border p-2 gap-1">
+                              <div
+                                className={`absolute ${
+                                  dayIndex === weekDays.length - 1
+                                    ? "right-full mr-2"
+                                    : "left-full ml-2"
+                                } top-0 invisible group-hover/day:visible opacity-0 group-hover/day:opacity-100 transition-all duration-200 hover:opacity-100 hover:visible z-50 w-48 bg-white dark:bg-zinc-900 rounded-lg shadow-xl border p-2 gap-1`}
+                              >
                                 <div className="text-xs font-medium mb-1">
                                   Other events:
                                 </div>

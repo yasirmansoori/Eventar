@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { getMonthDays } from "@/utils/date-utils";
+import { getMonthDays, isSpecialDay } from "@/utils/date-utils";
 import { MonthGridProps } from "@/types/month";
 import { WEEKDAYS } from "@/constants/calendar";
 import { DayCell } from "./day-cell";
@@ -16,6 +16,7 @@ export const MonthGrid = memo(function MonthGrid({
   events,
   showPastDates,
   handleEventClick,
+  specialDays,
 }: MonthGridProps) {
   const days = getMonthDays(year, monthIndex);
   const alignedWeekdays = getAlignedWeekdays(year, monthIndex);
@@ -38,6 +39,10 @@ export const MonthGrid = memo(function MonthGrid({
           events={events}
           showPastDates={showPastDates}
           handleEventClick={handleEventClick}
+          isSpecialDay={isSpecialDay(date, specialDays ?? [])}
+          specialDayContent={specialDays?.find(
+            (day) => day.date === date.toLocaleDateString()
+          )}
         />
       ))}
     </div>

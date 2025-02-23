@@ -2,7 +2,7 @@ import { DayCell } from "@/views/month-view/day-cell";
 import { WeekDaysHeader } from "@/views/month-view/week-days-header";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { getEventsForDate } from "@/utils/calendar-utils";
-import { getMonthDays } from "@/utils/date-utils";
+import { getMonthDays, isSpecialDay } from "@/utils/date-utils";
 import { MonthViewProps } from "@/types/month";
 
 export function MonthView({
@@ -13,6 +13,7 @@ export function MonthView({
   showPastDates = true,
   handleEventClick,
   handleDayClick,
+  specialDays,
 }: MonthViewProps) {
   const days = getMonthDays(year, month);
 
@@ -30,6 +31,10 @@ export function MonthView({
               showPastDates={showPastDates}
               handleEventClick={handleEventClick}
               handleDayClick={handleDayClick}
+              isSpecialDay={isSpecialDay(date, specialDays ?? [])}
+              specialDayContent={specialDays?.find((day) =>
+                isSpecialDay(date, [day])
+              )}
             />
           ))}
         </div>

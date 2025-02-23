@@ -1,4 +1,4 @@
-import { CalendarView } from "@/types/calendar";
+import { CalendarView, SpecialDay } from "@/types/calendar";
 
 export function isPastDate(date: Date) {
   const today = new Date();
@@ -52,5 +52,11 @@ export function isSameDay(date1: Date, date2: Date): boolean {
     date1.getFullYear() === date2.getFullYear() &&
     date1.getMonth() === date2.getMonth() &&
     date1.getDate() === date2.getDate()
+  );
+}
+
+export function isSpecialDay(date: Date, specialDays: SpecialDay[]): boolean {
+  return (
+    specialDays?.some((day) => day.date === date.toLocaleDateString()) ?? false
   );
 }

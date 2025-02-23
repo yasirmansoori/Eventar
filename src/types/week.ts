@@ -1,19 +1,20 @@
-import { CalendarEvent } from "./calendar";
+import { CalendarEvent, SpecialDay } from "./calendar";
 
 export interface WeekViewProps {
   date: Date;
   events: CalendarEvent[];
   showPastDates?: boolean;
   handleEventClick?: (e: React.MouseEvent, event: CalendarEvent) => void;
-  handleDayClick?: (date: Date) => void;
   isLoading?: boolean;
+  specialDays?: SpecialDay[];
 }
 
 export interface WeekHeaderProps {
   weekDays: Date[];
   currentDate: Date;
   isPastDate: (date: Date) => boolean;
-  onDayClick?: (date: Date) => void;
+  isSpecialDay: boolean;
+  specialDayContent?: SpecialDay;
 }
 
 export interface FullDayEventsWeekViewProps {

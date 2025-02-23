@@ -1,3 +1,4 @@
+import { isSpecialDay } from "@/utils/date-utils";
 import type { CalendarEvent, RenderViewProps } from "@/types/calendar";
 import { AgendaView } from "../views/agenda-view/agenda-view";
 import { DayView } from "../views/day-view/day-view";
@@ -20,6 +21,7 @@ export const renderView = ({
   setSelectedEvent,
   setIsEventModalOpen,
   agendaView,
+  specialDays,
 }: RenderViewProps) => {
   if (error) {
     return (
@@ -58,6 +60,7 @@ export const renderView = ({
           events={filteredEvents}
           showPastDates={showPastDates}
           handleEventClick={handleEventClick}
+          specialDays={specialDays}
         />
       );
     case "month":
@@ -76,6 +79,7 @@ export const renderView = ({
           customEventViewer={customEventViewer}
           handleEventClick={handleEventClick}
           handleDayClick={handleDayClick}
+          specialDays={specialDays}
         />
       );
     case "week":
@@ -90,7 +94,7 @@ export const renderView = ({
           events={filteredEvents}
           showPastDates={showPastDates}
           handleEventClick={handleEventClick}
-          handleDayClick={handleDayClick}
+          specialDays={specialDays}
         />
       );
     case "day":
@@ -106,6 +110,10 @@ export const renderView = ({
           showPastDates={showPastDates}
           handleEventClick={handleEventClick}
           handleDayClick={handleDayClick}
+          isSpecialDay={isSpecialDay(currentDate, specialDays ?? [])}
+          specialDayContent={specialDays?.find((day) =>
+            isSpecialDay(currentDate, [day])
+          )}
         />
       );
     default:

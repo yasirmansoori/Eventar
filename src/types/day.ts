@@ -6,6 +6,8 @@ export interface DayViewProps {
   showPastDates?: boolean;
   handleEventClick?: (e: React.MouseEvent, event: CalendarEvent) => void;
   handleDayClick?: (date: Date) => void;
+  isSpecialDay: boolean;
+  specialDayContent?: SpecialDay;
 }
 
 export interface DayCellProps {

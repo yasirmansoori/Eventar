@@ -1,3 +1,4 @@
+import { isSpecialDay } from "@/utils/date-utils";
 import type { CalendarEvent, RenderViewProps } from "@/types/calendar";
 import { AgendaView } from "../views/agenda-view/agenda-view";
 import { DayView } from "../views/day-view/day-view";
@@ -109,6 +110,10 @@ export const renderView = ({
           showPastDates={showPastDates}
           handleEventClick={handleEventClick}
           handleDayClick={handleDayClick}
+          isSpecialDay={isSpecialDay(currentDate, specialDays ?? [])}
+          specialDayContent={specialDays?.find((day) =>
+            isSpecialDay(currentDate, [day])
+          )}
         />
       );
     default:

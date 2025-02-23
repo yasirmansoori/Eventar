@@ -9,6 +9,7 @@ export interface MonthViewProps {
   customEventViewer?: (event: CalendarEvent) => JSX.Element;
   handleEventClick?: (e: React.MouseEvent, event: CalendarEvent) => void;
   handleDayClick?: (date: Date) => void;
+  specialDays?: SpecialDay[];
 }
 
 export interface MonthGridProps {

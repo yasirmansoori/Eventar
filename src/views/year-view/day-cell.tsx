@@ -1,9 +1,9 @@
 import { isSameDay } from "date-fns";
 import { memo, useState } from "react";
+import { SpecialDayModal } from "@/components/modals/special-day-modal";
 import { getDateClassName } from "@/utils/date-utils";
 import { YearViewDayCellProps } from "@/types/year";
 import { EventsPopover } from "./events-popover";
-import { SpecialDayModal } from "./special-day-modal";
 
 export const DayCell = memo(function DayCell({
   date,

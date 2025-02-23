@@ -78,6 +78,7 @@ export const renderView = ({
           customEventViewer={customEventViewer}
           handleEventClick={handleEventClick}
           handleDayClick={handleDayClick}
+          specialDays={specialDays}
         />
       );
     case "week":

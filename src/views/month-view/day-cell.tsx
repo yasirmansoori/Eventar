@@ -1,5 +1,7 @@
 import { format, isBefore, startOfDay } from "date-fns";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { SpecialDayModal } from "@/components/modals/special-day-modal";
 import { getEventBackgroundColorClass } from "@/utils/color-utils";
 import { getDateClassName } from "@/utils/date-utils";
 import { DayCellProps } from "@/types/day";
@@ -11,12 +13,22 @@ export function DayCell({
   showPastDates,
   handleEventClick,
   handleDayClick,
+  isSpecialDay,
+  specialDayContent,
 }: DayCellProps) {
   const visibleEvents = events.slice(0, 2);
   const remainingEvents = events.length - visibleEvents.length;
 
   const isToday = new Date().toDateString() === date.toDateString();
   const isPastDate = isBefore(date, startOfDay(new Date()));
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSpecialDayClick = () => {
+    if (isSpecialDay) {
+      setIsModalOpen(true);
+    }
+  };
 
   return (
     <motion.div
@@ -25,14 +37,25 @@ export function DayCell({
       animate={{ opacity: 1 }}
       transition={{ delay: index * 0.02 }}
     >
-      <div
-        className={`font-medium mb-2 ${
-          isToday
-            ? "border w-max px-2 rounded bg-black text-white dark:bg-white dark:text-black"
-            : ""
-        } ${isPastDate ? "line-through" : ""}`}
-      >
-        {date.getDate()}
+      <div className="flex gap-2 items-center mb-2 justify-between">
+        <div
+          className={`font-medium ${
+            isToday
+              ? "border w-max px-2 rounded bg-black text-white dark:bg-white dark:text-black"
+              : ""
+          } ${isPastDate ? "line-through" : ""}`}
+        >
+          {date.getDate()}
+        </div>
+
+        {isSpecialDay && (
+          <div
+            onClick={handleSpecialDayClick}
+            className="relative px-2 before:absolute before:inset-0 before:pointer-events-none before:bg-[repeating-linear-gradient(135deg,transparent,transparent_8px,currentColor_8px,currentColor_9px)] before:opacity-[0.1] hover:before:opacity-[0.5]bg-gradient-to-br from-purple-400/20 to-pink-400/20 border-2 border-purple-500/50 shadow-lg cursor-pointer rounded"
+          >
+            {specialDayContent?.title}
+          </div>
+        )}
       </div>
       <div className="space-y-1">
         {visibleEvents.map((event, i) => (
@@ -66,6 +89,15 @@ export function DayCell({
           </button>
         )}
       </div>
+
+      {isSpecialDay && specialDayContent && (
+        <SpecialDayModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          date={date}
+          content={specialDayContent}
+        />
+      )}
     </motion.div>
   );
 }

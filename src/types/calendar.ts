@@ -27,11 +27,9 @@ export type CalendarView = "year" | "month" | "week" | "day";
 export type Resource = {
   id: string;
   name: string;
-  type: "room" | "person" | "equipment" | "department";
+  type: string;
   color?: string;
   description?: string;
-  capacity?: number;
-  location?: string;
 };
 
 export type FilterColors = {
@@ -77,6 +75,8 @@ export interface EventarProps {
   customEventViewer?: (event: CalendarEvent) => JSX.Element;
   defaultModalConfig?: DefaultModalConfig;
   showAgenda?: boolean;
+  showClock?: boolean;
+  resources?: Resource[];
 }
 
 export interface RenderViewProps {
@@ -109,6 +109,10 @@ export interface CalendarHeaderProps {
   showAgenda: boolean;
   agendaView: boolean;
   handleAgendaView?: (agendaView: boolean) => void;
+  showClock: boolean;
+  resources: Resource[];
+  selectedResource: string;
+  onResourceChange: (resourceId: string) => void;
 }
 
 export interface ViewOptionsProps {

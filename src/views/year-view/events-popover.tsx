@@ -1,4 +1,5 @@
 import * as Popover from "@radix-ui/react-popover";
+import { getEventBorderColorClass } from "@/utils/color-utils";
 import { EventsPopoverProps } from "@/types/event";
 
 export function EventsPopover({
@@ -32,7 +33,9 @@ export function EventsPopover({
               <button
                 key={event.id || index}
                 onClick={(e) => handleEventClick?.(e, event)}
-                className="w-full text-left text-sm border-l-2 border-blue-500 pl-2 py-1 hover:bg-zinc-50 dark:hover:bg-zinc-700/50 transition-colors rounded"
+                className={`w-full text-left text-sm border-l-2 pl-2 py-1 hover:bg-zinc-50 dark:hover:bg-zinc-700/50 transition-colors rounded ${getEventBorderColorClass(
+                  event.color
+                )}`}
               >
                 <div className="font-medium">{event.title}</div>
                 <div className="text-xs text-zinc-500 dark:text-zinc-400">

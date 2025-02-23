@@ -24,3 +24,12 @@ export const getEventBackgroundColorClass = (
   }
   return "bg-zinc-900/10 dark:bg-zinc-50/10";
 };
+
+export const getEventBorderColorClass = (color?: BackgroundColor): string => {
+  if (color && color in DEFAULT_BACKGROUND_COLORS) {
+    return DEFAULT_BACKGROUND_COLORS[
+      color as keyof typeof DEFAULT_BACKGROUND_COLORS
+    ].borderClass;
+  }
+  return "border-zinc-900/10 dark:border-zinc-50/10";
+};

@@ -9,10 +9,34 @@ export const DEFAULT_FILTER_COLORS = {
 } as const;
 
 export const DEFAULT_BACKGROUND_COLORS = {
-  blue: { label: "Blue", bgClass: "bg-blue-100 dark:bg-blue-900" },
-  green: { label: "Green", bgClass: "bg-green-100 dark:bg-green-900" },
-  yellow: { label: "Yellow", bgClass: "bg-yellow-100 dark:bg-yellow-900" },
-  purple: { label: "Purple", bgClass: "bg-purple-100 dark:bg-purple-900" },
-  red: { label: "Red", bgClass: "bg-red-100 dark:bg-red-900" },
-  orange: { label: "Orange", bgClass: "bg-orange-100 dark:bg-orange-900" },
+  blue: {
+    label: "Blue",
+    bgClass: "bg-blue-100 dark:bg-blue-900",
+    borderClass: "border-blue-500 dark:border-blue-400",
+  },
+  green: {
+    label: "Green",
+    bgClass: "bg-green-100 dark:bg-green-900",
+    borderClass: "border-green-500 dark:border-green-400",
+  },
+  yellow: {
+    label: "Yellow",
+    bgClass: "bg-yellow-100 dark:bg-yellow-900",
+    borderClass: "border-yellow-500 dark:border-yellow-400",
+  },
+  purple: {
+    label: "Purple",
+    bgClass: "bg-purple-100 dark:bg-purple-900",
+    borderClass: "border-purple-500 dark:border-purple-400",
+  },
+  red: {
+    label: "Red",
+    bgClass: "bg-red-100 dark:bg-red-900",
+    borderClass: "border-red-500 dark:border-red-400",
+  },
+  orange: {
+    label: "Orange",
+    bgClass: "bg-orange-100 dark:bg-orange-900",
+    borderClass: "border-orange-500 dark:border-orange-400",
+  },
 } as const;

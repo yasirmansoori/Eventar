@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Fragment, useMemo, useState } from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { getEventsForDate } from "@/utils/calendar-utils";
 import { filterEvents } from "@/utils/event-filters";
 import type {
@@ -30,6 +31,8 @@ export function Eventar({
   customEventViewer,
   defaultModalConfig,
   showAgenda = false,
+  showClock = false,
+  resources = [],
 }: EventarProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(
@@ -37,7 +40,14 @@ export function Eventar({
   );
   const [isDayModalOpen, setIsDayModalOpen] = useState(false);
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [selectedColors, setSelectedColors] = useLocalStorage<string[]>(
+    "eventar-selected-colors",
+    []
+  );
+  const [selectedResource, setSelectedResource] = useLocalStorage<string>(
+    "eventar-selected-resource",
+    "all"
+  );
 
   const currentYear = new Date().getFullYear().toString();
 
@@ -49,12 +59,23 @@ export function Eventar({
     ? [...yearRange].sort((a, b) => Number(a) - Number(b))
     : [currentYear];
 
-  const [view, setView] = useState<CalendarView>(defaultView);
+  const [view, setView] = useLocalStorage<CalendarView>(
+    "eventar-current-view",
+    defaultView
+  );
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [agendaView, setAgendaView] = useState(false);
+  const [agendaView, setAgendaView] = useLocalStorage<boolean>(
+    "eventar-agenda-view",
+    false
+  );
 
   const availableColors: FilterColors[] = useMemo(() => {
-    const validColors = events
+    const resourceEvents =
+      selectedResource === "all"
+        ? events
+        : events.filter((event) => event.resourceId === selectedResource);
+
+    const validColors = resourceEvents
       .map((event) => event.color)
       .filter(
         (color) =>
@@ -68,12 +89,13 @@ export function Eventar({
       );
 
     return Array.from(new Set(validColors));
-  }, [events]);
+  }, [events, selectedResource]);
 
   const filteredEvents = filterEvents(events, {
     view,
     currentDate,
     selectedColors,
+    selectedResource,
   });
 
   const handleColorToggle = (color: string) => {
@@ -103,6 +125,10 @@ export function Eventar({
             showAgenda={showAgenda}
             agendaView={agendaView}
             handleAgendaView={() => setAgendaView(!agendaView)}
+            showClock={showClock}
+            resources={resources}
+            selectedResource={selectedResource}
+            onResourceChange={setSelectedResource}
           />
           <motion.main
             id="calendar-view"

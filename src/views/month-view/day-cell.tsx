@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, isBefore, startOfDay } from "date-fns";
 import { motion } from "framer-motion";
 import { getEventBackgroundColorClass } from "@/utils/color-utils";
 import { getDateClassName } from "@/utils/date-utils";
@@ -16,13 +16,11 @@ export function DayCell({
   const remainingEvents = events.length - visibleEvents.length;
 
   const isToday = new Date().toDateString() === date.toDateString();
+  const isPastDate = isBefore(date, startOfDay(new Date()));
 
   return (
     <motion.div
-      className={
-        "min-h-[180px] p-2 border border-zinc-200 relative group dark:border-zinc-800" +
-        getDateClassName(date, showPastDates, "month")
-      }
+      className={`min-h-[180px] p-2 m-1 border border-zinc-200 rounded relative group dark:border-zinc-800 ${getDateClassName(date, showPastDates, "month")} hover:bg-zinc-50 dark:hover:bg-zinc-900/20 hover:border-blue-500 transition-all`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: index * 0.02 }}
@@ -32,7 +30,7 @@ export function DayCell({
           isToday
             ? "border w-max px-2 rounded bg-black text-white dark:bg-white dark:text-black"
             : ""
-        }`}
+        } ${isPastDate ? "line-through" : ""}`}
       >
         {date.getDate()}
       </div>

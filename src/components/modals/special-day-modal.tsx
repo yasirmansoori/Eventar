@@ -50,15 +50,17 @@ export const SpecialDayModal = ({
                     </span>
                   </div>
 
-                  <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    {content.title}
-                  </h2>
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                      {content.title}
+                    </h2>
 
-                  <div className="inline-block px-3 py-1 rounded-full text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
-                    {content.type}
+                    <div className="inline-block px-3 py-1 rounded text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+                      {content.type}
+                    </div>
                   </div>
 
-                  <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                  <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-lg">
                     {content.description}
                   </p>
 

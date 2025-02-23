@@ -6,6 +6,7 @@ export function EventsPopover({
   events,
   date,
   handleEventClick,
+  specialDayContent,
 }: EventsPopoverProps) {
   return (
     <Popover.Root>
@@ -29,6 +30,19 @@ export function EventsPopover({
             <div className="font-semibold">
               {date.toLocaleDateString(undefined, { dateStyle: "long" })}
             </div>
+            {specialDayContent && (
+              <div className="relative flex flex-col p-2 from-purple-400/20 to-pink-400/20 border-2 border-purple-500/50 shadow-lg rounded">
+                <div className="flex justify-between">
+                  <div className="font-medium">{specialDayContent.title}</div>
+                  <div className="text-xs border w-max h-max px-1 rounded bg-purple-500 text-white dark:bg-pink-500 dark:text-white">
+                    {specialDayContent.type}
+                  </div>
+                </div>
+                <div className="text-xs text-zinc-500 dark:text-zinc-400 border w-max px-1 rounded mt-1">
+                  {specialDayContent.description}
+                </div>
+              </div>
+            )}
             {events.map((event, index) => (
               <button
                 key={event.id || index}

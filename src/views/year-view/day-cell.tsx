@@ -43,20 +43,26 @@ export const DayCell = memo(function DayCell({
             events={dateEvents}
             date={date}
             handleEventClick={handleEventClick}
+            specialDayContent={
+              dateEvents.length > 0 ? specialDayContent : undefined
+            }
           />
         ) : (
           date.getDate()
         )}
       </div>
 
-      {isSpecialDay && specialDayContent && (
-        <SpecialDayModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          date={date}
-          content={specialDayContent}
-        />
-      )}
+      {isSpecialDay &&
+        specialDayContent &&
+        dateEvents.length < 1 &&
+        isModalOpen && (
+          <SpecialDayModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            date={date}
+            content={specialDayContent}
+          />
+        )}
     </>
   );
 });

@@ -93,7 +93,7 @@ export const renderView = ({
           events={filteredEvents}
           showPastDates={showPastDates}
           handleEventClick={handleEventClick}
-          handleDayClick={handleDayClick}
+          specialDays={specialDays}
         />
       );
     case "day":

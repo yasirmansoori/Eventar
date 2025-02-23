@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { useWeekViewCalculations } from "@/hooks/use-week-view-calculations";
 import { getEventBackgroundColorClass } from "@/utils/color-utils";
+import { isSpecialDay } from "@/utils/date-utils";
 import { WeekViewProps } from "@/types/week";
 
 export function WeekView({
@@ -13,8 +14,8 @@ export function WeekView({
   events,
   showPastDates = true,
   handleEventClick,
-  handleDayClick,
   isLoading,
+  specialDays,
 }: WeekViewProps) {
   const { weekDays, hours, fullDayEvents, isPastDate } =
     useWeekViewCalculations(date, events, showPastDates);
@@ -37,7 +38,10 @@ export function WeekView({
             weekDays={weekDays}
             currentDate={date}
             isPastDate={isPastDate}
-            onDayClick={isPastDate(date) ? undefined : handleDayClick}
+            isSpecialDay={isSpecialDay(date, specialDays ?? [])}
+            specialDayContent={specialDays?.find((day) =>
+              isSpecialDay(date, [day])
+            )}
           />
 
           <div className="relative">

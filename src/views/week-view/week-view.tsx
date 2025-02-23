@@ -111,7 +111,13 @@ export function WeekView({
 
                             {/* Hover preview for stacked events */}
                             {eventIndex === 0 && eventArray.length > 1 && (
-                              <div className="absolute left-full top-0 ml-2 hidden group-hover/day:block z-50 w-48 bg-white dark:bg-zinc-900 rounded-lg shadow-xl border p-2 gap-1">
+                              <div
+                                className={`absolute ${
+                                  dayIndex === weekDays.length - 1
+                                    ? "right-full mr-2"
+                                    : "left-full ml-2"
+                                } top-0 invisible group-hover/day:visible opacity-0 group-hover/day:opacity-100 transition-all duration-200 hover:opacity-100 hover:visible z-50 w-48 bg-white dark:bg-zinc-900 rounded-lg shadow-xl border p-2 gap-1`}
+                              >
                                 <div className="text-xs font-medium mb-1">
                                   Other events:
                                 </div>

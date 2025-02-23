@@ -2,7 +2,7 @@
   "name": "eventar",
   "description": "A powerful, customizable, and lightweight React calendar component with seamless event management.",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -11,6 +11,7 @@
     "type": "git",
     "url": "https://github.com/YasirMansoori/Eventar.git"
   },
+  "homepage": "https://eventar.yasirmansoori.in/",
   "sideEffects": [
     "**/*.css"
   ],
